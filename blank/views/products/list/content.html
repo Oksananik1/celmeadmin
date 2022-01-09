@@ -1,0 +1,21 @@
+<div class="row">
+    <h1>Продукция</h1>
+</div>
+<div class="row">
+    <div class="col-3" >
+        <div style="border:2px groove #7d7d7d">
+            <h5>Группы</h5>
+            <nav class="nav flex-column nav-pills">
+                {{range .Groups}}
+                <a class="nav-link {{.Active}}" aria-current="page"
+                   href="/celmeadmin/product/list?n={{.Name }}">{{.Name }}</a>
+                {{end}}
+            </nav>
+        </div>
+        <a class="btn btn-primary"
+           href="/celmeadmin/product/edit?gr={{.State.NameGroup}}"
+           role="button">Добавить товар</a>
+
+    </div>
+        {{template "list" .}}
+</div>

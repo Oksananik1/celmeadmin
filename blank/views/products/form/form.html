@@ -1,0 +1,103 @@
+<form action="/celmeadmin/product/save" method="post" id="productEdit"
+      enctype="multipart/form-data">
+    <input type="hidden" id="id" name="id" value="{{.Item.ID.Hex}}">
+
+    <div class="mb-3">
+        <div class="row">
+            <div class="col-9">
+                <input type="text" class="form-control" id="name" name="name"
+                       value="{{.Item.Name}}"
+                       placeholder="Название" aria-label="Название"
+                       required="">
+            </div>
+            <div class="col-3">
+                <input type="text" class="form-control" id="price"
+                       value="{{.Item.Price}}" name="price"
+                       placeholder="Цена" aria-label="Цена" required="">
+            </div>
+        </div>
+    </div>
+    <div class=" mb-3">
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group">
+                    <span class="input-group-text"
+                          id="basic-addon3">Группа</span>
+                    <select class="form-select" name="group" id="group"
+                            aria-describedby="basic-addon3">
+                        {{range .Groups}}
+                        <option {{.Active}}>{{.Name }}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group">
+                    <span class="input-group-text">Номер для сортировки</span>
+                    <input type="text" class="form-control" id="order"
+                           value="{{.Item.Order}}" name="order" required="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="smallDescr" class="form-label">Краткое описание</label>
+        <input type="text" class="form-control" id="smallDescr"
+               name="smallDescr"
+               value="{{.Item.SmallDescr}}">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Подробное описание</span>
+        <textarea class="form-control"
+                  aria-label="Подробное описание" name="descr"
+                  value="{{.Item.Descr}}" id="descr">{{.Item.Descr}}</textarea>
+    </div>
+
+    <input type="hidden" id="fileName" name="id" value="{{.Item.Photo}}">
+    {{if(ne .Item.Photo "")}}
+    <div class="mb-3">
+        <div class="row">
+            <div class="col-4">
+                <img src="{{.Item.Photo}}" style="width: 100%;">
+            </div>
+            <div class="col-6">
+                <label for="photoFile" class="form-label">Изменить фото</label>
+                <input class="form-control" type="file" id="photoFile"
+                       name="photoFile">
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="mb-3">
+        <label for="photoFile" class="form-label">Прикрепить фото</label>
+        <input class="form-control" type="file" id="photoFile"
+               name="photoFile">
+    </div>
+    {{end}}
+    <h3>Характеристики</h3>
+    <textarea id="feature" style="display: none;" name="feature"></textarea>
+
+    <div class="d-flex">
+        <button type="submit" form="productEdit" value="sav"
+                class="btn btn-primary">Сохранить
+        </button>
+        <a class="btn btn-danger" href="/celmeadmin/product/delete?id={{.Item.ID.Hex}}"
+           role="button">Удалить товар</a>
+    </div>
+</form>
+<script>
+    $(window).ready(function () {
+        $("#feature").editTable({
+            data: {{.Item.FeatureStr}},
+        headerCols: [
+            'Название',
+            'Значение',
+        ],
+            maxRows
+    :
+        10
+    })
+        ;
+    })
+</script>
+

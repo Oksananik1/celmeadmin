@@ -1,0 +1,29 @@
+
+
+
+<div class="col-9">
+    <table class="table">
+        {{$root := .}}
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание(Краткое)</th>
+            <th>Цена</th>
+            <th>Номер для сортировки</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{range .Items}}
+        <tr>
+            <td>
+                <a href="edit?id={{.ID.Hex}}">{{.Name}}</a>
+            </td>
+            <td>{{.SmallDescr}}</td>
+            <td>{{.Price}}</td>
+            <td>{{.Order}}</td>
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+
+</div>

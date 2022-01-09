@@ -1,0 +1,3 @@
+export PATH=$PATH:/usr/local/go/bin:/Users/Admin/go/bin
+export
+go-bindata -pkg blank -o vendor/celme/bindata/blank/bindata.go   blank/static/...  blank/views/...
