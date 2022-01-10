@@ -7,6 +7,7 @@ import (
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"net/http"
 )
@@ -100,7 +101,10 @@ func loadList(mongoURI, dbName, group string) ([]ListItem, error) {
 		return results, err
 	}
 	collection := db.Session.Database(db.Name).Collection("products")
+	findOptions := options.Find()
+	findOptions.SetSort(bson.D{{"order", 1}})
 	cur, err := collection.Find(db.Ctx, crit)
+
 	if err != nil {
 		log.Println(err)
 		return results, err

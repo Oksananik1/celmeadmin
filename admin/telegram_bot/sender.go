@@ -15,7 +15,6 @@ func TelegramSender(token, mongoURI, dbName string) {
 	}
 
 	for {
-		fmt.Println("msg")
 		time.Sleep(time.Second * 10)
 
 		messages, err := findMessagesSubscribe(mongoURI, dbName)
