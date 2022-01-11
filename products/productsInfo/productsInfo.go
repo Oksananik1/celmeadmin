@@ -103,7 +103,7 @@ func loadList(mongoURI, dbName, group string) ([]ListItem, error) {
 	collection := db.Session.Database(db.Name).Collection("products")
 	findOptions := options.Find()
 	findOptions.SetSort(bson.D{{"order", 1}})
-	cur, err := collection.Find(db.Ctx, crit)
+	cur, err := collection.Find(db.Ctx, crit, findOptions)
 
 	if err != nil {
 		log.Println(err)
