@@ -1,0 +1,62 @@
+<form action="/celmeadmin/files/save" method="post" id="fileEdit"
+      enctype="multipart/form-data">
+    <input type="hidden" id="id" name="id" value="{{.Item.ID.Hex}}">
+
+
+    <div class="row">
+        <div class="col-8">
+            <div class="input-group">
+                <span class="input-group-text">Подробное описание</span>
+                <textarea class="form-control"
+                          aria-label="Подробное описание" name="descr"
+                          value="{{.Item.Descr}}"
+                          id="descr">{{.Item.Descr}}</textarea>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <span class="input-group-text">Номер для сортировки</span>
+                <input type="text" class="form-control" id="order"
+                       value="{{.Item.Order}}" name="order" required="">
+            </div>
+        </div>
+    </div>
+
+
+    <input type="hidden" id="fileName" name="fileName"
+           value="{{.Item.FilePath}}">
+    <input type="hidden" id="name" name="name"
+           value="{{.Item.Name}}">
+    {{if(ne .Item.FilePath "")}}
+    <div class="mb-3">
+        <div class="row">
+            <div class="col-4">
+                <a href="{{.Item.FilePath}}" target="_blank">{{.Item.Name}}</a>
+            </div>
+            <div class="col-6">
+                <label for="file" class="form-label">Заменить файл</label>
+                <input class="form-control" type="file" id="file"
+                       name="file">
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="mb-3">
+        <label for="file" class="form-label">Загрузить файл</label>
+        <input class="form-control" type="file" id="file"
+               name="file">
+    </div>
+    {{end}}
+
+
+    <div class="d-flex">
+        <button type="submit" form="fileEdit" value="sav"
+                class="btn btn-primary">Сохранить
+        </button>
+        <a class="btn btn-danger"
+           href="/celmeadmin/files/delete?id={{.Item.ID.Hex}}"
+           role="button">Удалить файл</a>
+    </div>
+</form>
+
+

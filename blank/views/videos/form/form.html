@@ -1,0 +1,44 @@
+<form action="/celmeadmin/videos/save" method="post" id="fileEdit"
+      enctype="multipart/form-data">
+    <input type="hidden" id="id" name="id" value="{{.Item.ID.Hex}}">
+
+
+    <div class="row">
+        <div class="col-8">
+            <input type="text" class="form-control" id="name" name="name"
+                   value="{{.Item.Name}}"
+                   placeholder="Название" aria-label="Название"
+                   required="">
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <span class="input-group-text">Номер для сортировки</span>
+                <input type="text" class="form-control" id="order"
+                       value="{{.Item.Order}}" name="order" required="">
+            </div>
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Код для встраивания видео</span>
+        <textarea class="form-control"
+                  aria-label="Код видео" name="descr"
+                  value="{{.Item.Descr}}" id="descr">{{.Item.Descr}}</textarea>
+    </div>
+
+    <a href="https://support.google.com/youtube/answer/171780?hl=ru"
+       style="font-size: small">Как встроить ролик или плейлист на сторонний ресурс</a>
+
+
+
+
+    <div class="d-flex">
+        <button type="submit" form="fileEdit" value="sav"
+                class="btn btn-primary">Сохранить
+        </button>
+        <a class="btn btn-danger"
+           href="/celmeadmin/videos/delete?id={{.Item.ID.Hex}}"
+           role="button">Удалить видео</a>
+    </div>
+</form>
+
+
